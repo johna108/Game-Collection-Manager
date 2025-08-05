@@ -6,51 +6,95 @@ const Register = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { loginUser } = useGames()
+  const [message, setMessage] = useState('')
+  const { registerUser } = useGames()
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    loginUser(username)
-    navigate('/collection')
+
+    const result = registerUser(username, email, password)
+    
+    if (result.success) {
+      setMessage(result.message)
+      setTimeout(() => {
+        navigate('/collection')
+      }, 1000)
+    } else {
+      setMessage(result.message)
+    }
   }
 
   return (
-    <div>
+    <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
       <h1>Create an Account</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={{ marginBottom: '15px' }}>
           <label htmlFor="username">Username:</label>
           <input 
             type="text" 
             id="username" 
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            style={{ 
+              width: '100%'
+            }}
             required 
           />
         </div>
-        <div>
+        <div style={{ marginBottom: '15px' }}>
           <label htmlFor="email">Email:</label>
           <input 
             type="email" 
             id="email" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{ 
+              width: '100%', 
+            }}
             required 
           />
         </div>
-        <div>
+        <div style={{ marginBottom: '15px' }}>
           <label htmlFor="password">Password:</label>
           <input 
             type="password" 
             id="password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{ 
+              width: '100%', 
+            }}
             required 
           />
         </div>
-        <button type="submit">Register</button>
+        <button 
+          type="submit"
+          style={{
+            width: '100%',
+            padding: '10px',
+            backgroundColor: '#3728a7ff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          Register
+        </button>
       </form>
+      
+      {message && (
+        <div style={{ 
+          marginTop: '15px', 
+          padding: '10px', 
+          borderRadius: '4px',
+          backgroundColor: message.includes('successful') ? '#d4edda' : '#f8d7da',
+          color: message.includes('successful') ? '#155724' : '#721c24'
+        }}>
+          {message}
+        </div>
+      )}
     </div>
   )
 }

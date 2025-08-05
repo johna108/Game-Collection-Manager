@@ -10,6 +10,11 @@ export const GameProvider = ({ children }) => {
   const [games, setGames] = useState([])
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
+  const [users, setUsers] = useState([
+    { id: 1, username: 'john', email: 'jhonsamliv@gmail.com', password: '123' },
+    { id: 2, username: 'priya', email: 'priya@gmail.com', password: '123' },
+    { id: 3, username: 'admin', email: 'admin@gmail.com', password: '123' }
+  ])
 
   const fetchGames = async () => {
     setLoading(true)
@@ -23,8 +28,29 @@ export const GameProvider = ({ children }) => {
     setLoading(false)
   }
 
-  const loginUser = (username) => {
-    setUser({ username })
+  const loginUser = (email, password) => {
+    const foundUser = users.find(u => u.email === email && u.password === password)
+    if (foundUser) {
+      setUser({ id: foundUser.id, username: foundUser.username, email: foundUser.email })
+      return { success: true, message: 'Login successful!' }
+    }
+    return { success: false, message: 'Invalid email or password' }
+  }
+
+  const registerUser = (username, email, password) => {
+
+    const existingUser = users.find(u => u.email === email || u.username === username)
+
+    const newUser = {
+      id: users.length + 1,
+      username,
+      email,
+      password
+    }
+    
+    setUsers([...users, newUser])
+    setUser({ id: newUser.id, username: newUser.username, email: newUser.email })
+    return { success: true, message: 'Registration successful!' }
   }
 
   const logoutUser = () => {
@@ -35,8 +61,10 @@ export const GameProvider = ({ children }) => {
     games,
     loading,
     user,
+    users,
     fetchGames,
     loginUser,
+    registerUser,
     logoutUser
   }
 

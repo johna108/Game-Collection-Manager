@@ -9,7 +9,8 @@ const Collection = () => {
   }, [])
 
   if (loading) {
-    return <div><h1>Loading games...</h1></div>
+    return <div style={{ textAlign: 'center', marginTop: '20px' }}>
+      <h1>Loading games...</h1></div>
   }
 
   return (

@@ -14,8 +14,8 @@ const Collection = () => {
 
   return (
     <div>
-      <h1>Game Collection</h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Game Collection</h1>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
         {games.map(game => (
           <div key={game.id} style={{ 
             border: '1px solid #ccc', 

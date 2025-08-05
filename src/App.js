@@ -6,6 +6,8 @@ import Login from "./Login";
 import Register from "./Register";
 import Collection from "./Collection";
 import Navbar from "./Navbar";
+import Mycollection from "./Mycollection";
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/collection" element={<Collection />} />
+          <Route path="/mycollection" element={<Mycollection />} />
         </Routes>
       </Router>
     </GameProvider>

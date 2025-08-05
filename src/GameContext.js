@@ -7,10 +7,13 @@ export const useGames = () => {
 }
 
 export const GameProvider = ({ children }) => {
+  
   const [games, setGames] = useState([])
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
+  const [myCollection, setMyCollection] = useState([])
   const [users, setUsers] = useState([
+    
     { id: 1, username: 'john', email: 'jhonsamliv@gmail.com', password: '123' },
     { id: 2, username: 'priya', email: 'priya@gmail.com', password: '123' },
     { id: 3, username: 'admin', email: 'admin@gmail.com', password: '123' }
@@ -57,15 +60,29 @@ export const GameProvider = ({ children }) => {
     setUser(null)
   }
 
+  const addToCollection = (game) => {
+    const isAlreadyAdded = myCollection.find(g => g.id === game.id)
+    if (!isAlreadyAdded) {
+      setMyCollection([...myCollection, game])
+    }
+  }
+
+  const removeFromCollection = (gameId) => {
+    setMyCollection(myCollection.filter(game => game.id !== gameId))
+  }
+
   const value = {
     games,
     loading,
     user,
     users,
+    myCollection,
     fetchGames,
     loginUser,
     registerUser,
-    logoutUser
+    logoutUser,
+    addToCollection,
+    removeFromCollection
   }
 
   return (

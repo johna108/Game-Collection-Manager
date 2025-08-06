@@ -23,11 +23,11 @@ export default class Navbar extends Component {
             <form className="d-flex">
               <ul className="navbar-nav me-auto">
                 <li class="nav-item">
-                    <NavLink to="/login">Login</NavLink>&nbsp;&nbsp;&nbsp;
+                    <NavLink className="nav-link" to="/login">Login</NavLink>&nbsp;&nbsp;&nbsp;
                   </li>
 
                   <li class="nav-item">
-                    <NavLink to="/register">Register</NavLink>&nbsp;&nbsp;&nbsp;
+                    <NavLink className="nav-link" to="/register">Register</NavLink>&nbsp;&nbsp;&nbsp;
                   </li>
               </ul>
             </form>
